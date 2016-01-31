@@ -1,0 +1,6 @@
+#!/bin/bash
+
+cd /sign
+openssl ca \
+	-out cert.pem \
+	-infiles csr.pem

@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if [ -e /ca/index.txt ]; then
+  echo "'/ca/*' has already existed"
+else
+  mkdir -p /ca/certs /ca/private /ca/cr1 /ca/newcerts
+  chmod 700 /ca/private
+  echo "01" > /ca/serial
+  touch /ca/index.txt
+fi
+

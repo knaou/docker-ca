@@ -1,0 +1,23 @@
+#!/bin/bash
+
+if [ -z "$KEY_LENGTH" ]; then
+	KEY_LENGTH=2048
+fi
+if [ -z "$DAY" ]; then
+	DAY=`expr 365 \* 5`
+fi
+
+/bin/init_ca_dir
+
+cd /ca
+openssl req \
+	-new \
+	-x509 \
+	-newkey rsa:$KEY_LENGTH \
+	-out cacert.pem \
+	-keyout private/cakey.pem \
+	-days $DAY &&
+chmod 600 private/cakey.pem &&
+openssl x509 -inform PEM -outform DER -in cacert.pem -out cacert.der
+
+

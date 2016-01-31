@@ -1,0 +1,7 @@
+#!/bin/bash
+
+cd /sign
+openssl rsa \
+	-in key.pem \
+	-out key.nopass.pem
+
