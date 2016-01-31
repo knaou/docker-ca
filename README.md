@@ -21,7 +21,7 @@ When you set up apache with ssl or other case, run create_csr command to create 
 or
 
     docker run -it -v `pwd`/ca:/ca -v `pwd`/sign:/sign knaou/docker-ca bash
-
+    
     # Into ca environment and,
     
     create_csr
@@ -36,7 +36,7 @@ sign command expects /sign/csr.pem file.
 create_csr command makes /sign/csr.pem.
 When you want to use your CSR, put sign/csr.pem before running upper command.
 
-## Best-practice: Make your CA images that contains /ca
+## Best-practice: Make your CA image that contains /ca
 
 ### Build
 I suggest to make your CA image from docker hub.
@@ -57,7 +57,7 @@ And, build this file.
 
 ### Create CSR and sign it
 
-    docker run -it -v `pwd`/ca:/ca -v `pwd`/sign:/sign knaou/docker-ca bash
+    docker run -it -v `pwd`/sign:/sign knaou/docker-ca bash
     # Into ca environment and,
     
     create_csr
