@@ -7,7 +7,7 @@ Provide Dockerfile to build private CA environment with ubuntu
 
 ### Initialize CA directory
 
-    docker run -it -v `pwd`/ca:/ca knaou/ca create_ca
+    docker run -it -v `pwd`/ca:/ca knaou/docker-ca create_ca
 
 'create_ca' command makes CA environment on /path/to/ca.
 
@@ -15,12 +15,12 @@ Provide Dockerfile to build private CA environment with ubuntu
 
 When you set up apache with ssl or other case, run create_csr command to create csr.
 
-    docker run -it -v `pwd`/ca:/ca -v `pwd`/sign:/sign knaou/ca create_csr
-    docker run -it -v `pwd`/ca:/ca -v `pwd`/sign:/sign knaou/ca create_no_pass_key
+    docker run -it -v `pwd`/ca:/ca -v `pwd`/sign:/sign knaou/docker-ca create_csr
+    docker run -it -v `pwd`/ca:/ca -v `pwd`/sign:/sign knaou/docker-ca create_no_pass_key
 
 or
 
-    docker run -it -v `pwd`/ca:/ca -v `pwd`/sign:/sign knaou/ca bash
+    docker run -it -v `pwd`/ca:/ca -v `pwd`/sign:/sign knaou/docker-ca bash
 
     # Into ca environment and,
     
@@ -29,7 +29,7 @@ or
     
 ### Sign your CSR
 
-    docker run -it -v `pwd`/ca:/ca -v `pwd`/sign:/sign knaou/ca sign
+    docker run -it -v `pwd`/ca:/ca -v `pwd`/sign:/sign knaou/docker-ca sign
 
 sign command expects /sign/csr.pem file.
  
@@ -43,11 +43,11 @@ I suggest to make your CA image from docker hub.
 
 First, you run create_ca command.
 
-    docker run -it -v /path/to/ca:/ca knaou/ca create_ca
+    docker run -it -v /path/to/ca:/ca knaou/docker-ca create_ca
 
 And, describe your Dockerfile.
 
-    FROM knaou/ca
+    FROM knaou/docker-ca
     MAINTAINER your name
     COPY ca /ca
 
@@ -57,7 +57,7 @@ And, build this file.
 
 ### Create CSR and sign it
 
-    docker run -it -v `pwd`/ca:/ca -v `pwd`/sign:/sign knaou/ca bash
+    docker run -it -v `pwd`/ca:/ca -v `pwd`/sign:/sign knaou/docker-ca bash
     # Into ca environment and,
     
     create_csr
@@ -67,5 +67,3 @@ And, build this file.
 
 You get the signed file on sign directory!
 
-    
-    
