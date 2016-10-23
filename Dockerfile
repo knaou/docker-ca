@@ -1,7 +1,10 @@
 FROM ubuntu
 MAINTAINER naou <monaou@gmail.com>
 
-RUN apt-get install openssl && apt-get clean
+RUN apt-get update && \
+    apt-get -y install openssl && \
+	apt-get clean && \
+	rm -rf /var/lib/apt/*
 
 RUN mkdir -p /ca
 COPY bin /bin
