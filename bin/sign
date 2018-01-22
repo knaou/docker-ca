@@ -1,10 +1,13 @@
 #!/bin/bash
 
+if [ -z "$DAY" ]; then
+	DAY=`expr 365 \* 5`
+fi
+
 usage_exit() {
     echo "Usage: $0 [-a altname] [-u]  [-h]" 1>&2
     exit 1
 }
-
 echo "" > /tmp/extfile.conf
 
 while getopts a:uh OPT
@@ -25,6 +28,7 @@ shift $((OPTIND - 1))
 
 cd /sign
 openssl ca \
+	-days $DAY \
 	-out cert.pem \
 	-extfile /tmp/extfile.conf \
 	-in csr.pem
