@@ -1,6 +1,30 @@
 #!/bin/bash
 
+usage_exit() {
+    echo "Usage: $0 [-a altname] [-u]  [-h]" 1>&2
+    exit 1
+}
+
+echo "" > /tmp/extfile.conf
+
+while getopts a:uh OPT
+do
+    case $OPT in
+        a)  echo "subjectAltName = $OPTARG" > /tmp/extfile.conf
+            ;;
+        u)  echo "extendedKeyUsage = clientAuth" > /tmp/extfile.conf
+            ;;
+        h)  usage_exit
+            ;;
+        \?) usage_exit
+            ;;
+    esac
+done
+
+shift $((OPTIND - 1))
+
 cd /sign
 openssl ca \
 	-out cert.pem \
-	-infiles csr.pem
+	-extfile /tmp/extfile.conf \
+	-in csr.pem
