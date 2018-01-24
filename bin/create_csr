@@ -2,6 +2,7 @@
 
 cd /sign
 openssl req \
+	-x509 \
 	-new \
 	-keyout key.pem \
 	-out csr.pem
