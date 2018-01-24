@@ -28,6 +28,7 @@ shift $((OPTIND - 1))
 
 cd /sign
 openssl ca \
+	-x509 \
 	-days $DAY \
 	-out cert.pem \
 	-extfile /tmp/extfile.conf \
