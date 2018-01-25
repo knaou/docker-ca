@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 if [ -z "$KEY_LENGTH" ]; then
 	KEY_LENGTH=2048
@@ -19,5 +19,4 @@ openssl req \
 	-days $DAY &&
 chmod 600 private/cakey.pem &&
 openssl x509 -inform PEM -outform DER -in cacert.pem -out cacert.der
-
 

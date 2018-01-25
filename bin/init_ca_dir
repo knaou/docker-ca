@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 if [ -e /ca/index.txt ]; then
   echo "'/ca/*' has already existed"

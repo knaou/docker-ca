@@ -1,9 +1,9 @@
-#!/bin/bash
+#!/bin/sh
 
 cd /sign
 openssl req \
-	-x509 \
 	-new \
 	-keyout key.pem \
+	-inform DER \
 	-out csr.pem
 
